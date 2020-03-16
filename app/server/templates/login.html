@@ -1,23 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
 {% load widget_tweaks %}
-{% block content %}
 
+{% block header %}
+{% endblock %}
+
+{% block content %}
 <section class="hero container has-text-centered">
   <div class="columns hero-body">
     <div class="column is-4 is-offset-4">
+      <h1 class="h1-meio">Anotação de textos médicos</h1>
+      <p>Por favor, faça login para iniciar a anotação dos dados
+      </p>
+      <br>
       <div class="box has-text-left">
         {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+        <p>Usuário e senha incorretos. Tente novamente.</p>
         {% endif %} {% if next %} {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+        <p>Você não possui acesso à esta página. Contate o administrador.</p>
         {% else %}
-        <p>Please login to see this page.</p>
+        <p>Realize o login para ter acesso.</p>
         {% endif %} {% endif %}
 
         <form method="post" action="{% url 'login' %}">
           {% csrf_token %}
           <div class="field ">
-            <label class="label">Username</label>
+            <label class="label">Usuário</label>
             <div class="control has-icons-left has-icons-right">
               {{ form.username|add_class:"input" }}
               <span class="icon is-small is-left">
@@ -30,7 +38,7 @@
           </div>
 
           <div class="field">
-            <label class="label">Password</label>
+            <label class="label">Senha</label>
             <div class="control has-icons-left has-icons-right">
               {{ form.password|add_class:"input"}}
               <span class="icon is-small is-left">
@@ -43,10 +51,10 @@
           </div>
           <div class="field">
             <label class="checkbox">
-              <input type="checkbox"> Remember me
+              <input type="checkbox"> Lembre de mim
             </label>
           </div>
-          <input class="button is-block is-primary is-middle is-fullwidth" type="submit" value="Login" />
+          <input class="button is-block is-info is-middle is-fullwidth" type="submit" value="Login" />
           {% if allow_signup %}
           <div class="field">
             <span class="checkbox" style="margin-top:10px">
@@ -75,4 +83,54 @@
     </div>
   </div>
 </section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-3">
+        <h2>
+          <strong class="has-text-white">SOBRE</strong>
+        </h2>
+        <p>Este projeto é realizado em colaboração entre a UFRGS e o Hospital de Clínicas
+          de Porto Alegre (HCPA), com o objetivo de anonimizar dados médicos.</p>
+      </div>
+      <div class="column is-3">
+        <h2>
+          <strong class="has-text-white">USUÁRIOS</strong>
+        </h2>
+        <p>O acesso aos dados é restrito, assim como a criação de usuários.
+          No caso de problemas com o acesso, enviar e-mail para
+          <a href="mailto:lloliveira@inf.ufrgs.br?subject=Anotação-BRHIM">lloliveira@inf.ufrgs.br</a></p>
+      </div>
+      <div class="column is-3">
+        <h2>
+          <strong class="has-text-white">REALIZAÇÃO</strong>
+        </h2>
+        <div class="flex-vcenter">
+          <a href="http://inf.ufrgs.br" target="_blank">
+            <img src="{% static 'assets/images/logo_inf.jpg' %}" alt="Logo INF">
+          </a>
+          <a href="http://ufrgs.br" target="_blank">
+            <img src="{% static 'assets/images/logo_ufrgs.jpg' %}" alt="Logo UFRGS">
+          </a>
+          <a href="https://www.hcpa.edu.br/" target="_blank">
+            <img src="{% static 'assets/images/logo_hcpa.jpg' %}" alt="Logo HCPA">
+          </a>
+        </div>
+      </div>
+      <div class="column is-3">
+        <h2>
+          <strong class="has-text-white">DOCCANO</strong>
+        </h2>
+        <p>
+          <a href="https://github.com/doccano/doccano">Doccano</a>  
+          é uma ferramentade anotação de texto de código aberto, criada por
+          <a href="https://github.com/Hironsan">Hironsan</a>, com adaptações para este projeto por
+          <a href="https://github.com/lucaslioli">lucaslioli</a>. <i>The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a></i>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
 {% endblock %}

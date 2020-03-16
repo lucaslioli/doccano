@@ -15,8 +15,8 @@ from app import settings
 logger = logging.getLogger(__name__)
 
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
+class IndexView(BaseLoginView):
+    template_name = 'login.html'
 
 
 class ProjectView(LoginRequiredMixin, TemplateView):
